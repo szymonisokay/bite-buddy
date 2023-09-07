@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
+} 
+
+model User {
+  id          String @id @default(uuid())
+  userId      String @unique
+  name        String
+  imageUrl    String @db.Text
+  email       String @db.Text
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  addresses   Address[]
+  businesses  Business[]
+  reviews     Review[]
+  orders      Order[]
+
+  cart        Cart?
+}
+
+model Business {
+  id                  String @id @default(uuid())
+  name                String
+  bio                 String?
+  category            String
+  openHour            String
+  closeHour           String
+  deliveryHourStart   String
+  deliveryHourEnd     String
+  rating              Float
+  visibleInApp        Boolean
+  approved            Boolean
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  ownerId             String @unique
+  owner               User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  reviews             Review[]
+  meals               Meal[]
+
+  location            Location?
+
+  @@index([ownerId])
+}
+
+model Location {
+  id              String @id @default(uuid())
+  longitude       Float
+  latitude        Float
+  street1         String
+  street2         String?
+  city            String
+  zipCode         String
+  country         String?
+  deliveryRange   String
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  businessId      String @unique
+  business        Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId])
+}
+
+model Address {
+  id          String @id @default(uuid())
+  address     String
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      String @unique
+  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id            String @id @default(uuid())
+  title         String
+  content       String @db.Text
+  rating        Float
+  approved      Boolean
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  businessId    String @unique
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([businessId])
+}
+
+enum MealType {
+  MAIN
+  FASTFOOD
+  TRADITIONAL
+  SOUP
+  BEVERAGES
+  ADDITIVES
+  OTHER
+}
+
+model Meal {
+  id            String @id @default(uuid())
+  name          String
+  description   String?
+  type          MealType @default(MAIN)
+  price         Float
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  businessId    String @unique
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  cartId        String @unique
+  cart          Cart @relation(fields: [cartId], references: [id])
+
+  orderId       String @unique
+  order         Order @relation(fields: [orderId], references: [id])
+
+  @@index([businessId])
+  @@index([cartId])
+}
+
+model Cart {
+  id            String @id @default(uuid())
+  note          String? @db.Text
+  total         Float
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  meals         Meal[]
+  order         Order?
+
+  userId        String @unique
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum OrderType {
+  PENDING
+  NEW
+  PAID
+  DELIVERED
+}
+
+model Order {
+  id            String @id @default(uuid())
+  status        OrderType @default(NEW)
+  total         Float
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  meals         Meal[]
+
+  cartId        String @unique
+  cart          Cart @relation(fields: [cartId], references: [id])
+
+  userId        String
+  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
