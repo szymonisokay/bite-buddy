@@ -8,7 +8,7 @@ export const NavigationAction = () => {
 
 	return (
 		<button
-			onClick={() => router.push('/business')}
+			onClick={() => router.push('/create-business')}
 			className='flex items-center px-4 py-2 duration-200 border rounded-md cursor-pointer hover:bg-muted'
 		>
 			<StoreIcon className='w-5 h-5' />

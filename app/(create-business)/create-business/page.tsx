@@ -10,9 +10,9 @@ import {
 } from '@/components/ui/card'
 import { createUser } from '@/lib/create-user'
 import { getUser } from '@/lib/get-user'
-import { prisma } from '@/lib/prisma'
+import { prismadb } from '@/lib/prisma'
 
-const BusinessPage = async () => {
+const CreateBusinessPage = async () => {
 	await createUser()
 
 	const user = await getUser()
@@ -21,7 +21,7 @@ const BusinessPage = async () => {
 		return redirectToSignIn()
 	}
 
-	const business = await prisma.business.findUnique({
+	const business = await prismadb.business.findFirst({
 		where: {
 			ownerId: user.id,
 		},
@@ -43,10 +43,10 @@ const BusinessPage = async () => {
 						delivering via our app.
 					</CardDescription>
 				</CardHeader>
-				<InitialBusinessForm />
+				<InitialBusinessForm ownerId={user.id} />
 			</Card>
 		</div>
 	)
 }
 
-export default BusinessPage
+export default CreateBusinessPage

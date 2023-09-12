@@ -8,6 +8,10 @@ body,
 	height: 100%;
 }
 
+.business-select > span {
+	@apply truncate overflow-hidden;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;

@@ -1,6 +1,6 @@
 import { auth } from '@clerk/nextjs'
 
-import { prisma } from '@/lib/prisma'
+import { prismadb } from '@/lib/prisma'
 
 export const getUser = async () => {
 	const { userId } = auth()
@@ -9,7 +9,7 @@ export const getUser = async () => {
 		return null
 	}
 
-	const user = await prisma.user.findUnique({
+	const user = await prismadb.user.findUnique({
 		where: {
 			userId,
 		},

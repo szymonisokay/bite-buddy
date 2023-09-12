@@ -1,9 +1,12 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
 
+import { ClientOnlyProvider } from '@/components/providers/client-only-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 
+import { cn } from '../lib/utils'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -51,13 +54,14 @@ export default function RootLayout({
 			}}
 		>
 			<html lang='en' suppressHydrationWarning>
-				<body className={inter.className}>
+				<body className={cn('dark:bg-[#09090b]', inter.className)}>
 					<ThemeProvider
 						attribute='class'
 						defaultTheme='dark'
 						enableSystem
 					>
-						{children}
+						<Toaster position='top-right' reverseOrder />
+						<ClientOnlyProvider>{children}</ClientOnlyProvider>
 					</ThemeProvider>
 				</body>
 			</html>
