@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 
 import { TabsDetails } from '@/components/tabs/tabs-details'
 import { Tabsinformation } from '@/components/tabs/tabs-information'
+import { TabsLocation } from '@/components/tabs/tabs-location'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { getUser } from '@/lib/get-user'
 
@@ -46,6 +47,9 @@ const BusinessSettingsPage = async ({
 				</TabsContent>
 				<TabsContent value='details'>
 					<TabsDetails business={business} />
+				</TabsContent>
+				<TabsContent value='location'>
+					<TabsLocation business={business} />
 				</TabsContent>
 			</Tabs>
 		</>
