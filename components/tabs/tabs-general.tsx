@@ -1,11 +1,13 @@
-import { Business } from '@prisma/client'
+import { Meal } from '@prisma/client'
 
 import { BusinessGeneralForm } from '@/components/forms/business-general-form'
+import { BusinessWithOwnerWithLocation } from '@/types'
 
 type Props = {
-	business: Business
+	business: BusinessWithOwnerWithLocation
+	meals: Meal[]
 }
 
-export const TabsGeneral = ({ business }: Props) => {
-	return <BusinessGeneralForm business={business} />
+export const TabsGeneral = async ({ business, meals }: Props) => {
+	return <BusinessGeneralForm business={business} meals={meals} />
 }

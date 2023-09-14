@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Business } from '@prisma/client'
+import { Meal } from '@prisma/client'
 import axios from 'axios'
 import { Loader2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -12,9 +12,11 @@ import * as z from 'zod'
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 
 import { Heading } from '@/components/heading'
+import { Notice } from '@/components/notice'
 import { Button } from '@/components/ui/button'
-import { Label } from '../ui/label'
-import { Switch } from '../ui/switch'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
+import { BusinessWithOwnerWithLocation } from '@/types'
 
 const formSchema = z.object({
 	visibleInApp: z.boolean(),
@@ -24,10 +26,11 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 type Props = {
-	business: Business
+	business: BusinessWithOwnerWithLocation
+	meals: Meal[]
 }
 
-export const BusinessGeneralForm = ({ business }: Props) => {
+export const BusinessGeneralForm = ({ business, meals }: Props) => {
 	const router = useRouter()
 
 	const form = useForm<FormValues>({
@@ -39,6 +42,7 @@ export const BusinessGeneralForm = ({ business }: Props) => {
 	})
 
 	const loading = form.formState.isSubmitting
+	const noticeVisible = !(!!business.location && !!meals.length)
 
 	const onSubmit = async (values: FormValues) => {
 		try {
@@ -65,6 +69,14 @@ export const BusinessGeneralForm = ({ business }: Props) => {
 					description='General information about your business'
 				/>
 
+				{noticeVisible && (
+					<Notice
+						type='error'
+						title='Business visibility in app'
+						content="You can't set visibility of your business in BiteBuddy application because location of your business is not specified or your business doesn't have active meals on the menu."
+					/>
+				)}
+
 				<FormField
 					control={form.control}
 					name='visibleInApp'
@@ -88,6 +100,7 @@ export const BusinessGeneralForm = ({ business }: Props) => {
 										id='visibleInApp'
 										checked={field.value}
 										onCheckedChange={field.onChange}
+										disabled={loading || noticeVisible}
 									/>
 								</div>
 							</FormControl>
@@ -130,7 +143,7 @@ export const BusinessGeneralForm = ({ business }: Props) => {
 
 				<Button
 					variant='primary'
-					disabled={loading}
+					disabled={loading || noticeVisible}
 					className='self-end'
 				>
 					{loading && (

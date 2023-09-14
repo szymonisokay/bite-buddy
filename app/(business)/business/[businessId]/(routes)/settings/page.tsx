@@ -35,6 +35,12 @@ const BusinessSettingsPage = async ({
 		return redirect('/')
 	}
 
+	const meals = await prismadb.meal.findMany({
+		where: {
+			businessId: params.businessId,
+		},
+	})
+
 	return (
 		<>
 			<Tabs defaultValue='information'>
@@ -54,7 +60,7 @@ const BusinessSettingsPage = async ({
 					<TabsLocation business={business} />
 				</TabsContent>
 				<TabsContent value='general'>
-					<TabsGeneral business={business} />
+					<TabsGeneral business={business} meals={meals} />
 				</TabsContent>
 			</Tabs>
 		</>
