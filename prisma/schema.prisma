@@ -60,7 +60,7 @@ model Location {
   street1         String
   street2         String?
   city            String
-  postalCode         String
+  postalCode      String
   country         String?
   deliveryRange   Int
 

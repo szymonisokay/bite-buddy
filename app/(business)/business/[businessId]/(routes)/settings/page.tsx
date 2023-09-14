@@ -3,6 +3,7 @@ import { redirectToSignIn } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 
 import { TabsDetails } from '@/components/tabs/tabs-details'
+import { TabsGeneral } from '@/components/tabs/tabs-general'
 import { Tabsinformation } from '@/components/tabs/tabs-information'
 import { TabsLocation } from '@/components/tabs/tabs-location'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -41,6 +42,7 @@ const BusinessSettingsPage = async ({
 					<TabsTrigger value='information'>Information</TabsTrigger>
 					<TabsTrigger value='details'>Details</TabsTrigger>
 					<TabsTrigger value='location'>Location</TabsTrigger>
+					<TabsTrigger value='general'>General</TabsTrigger>
 				</TabsList>
 				<TabsContent value='information'>
 					<Tabsinformation business={business} />
@@ -50,6 +52,9 @@ const BusinessSettingsPage = async ({
 				</TabsContent>
 				<TabsContent value='location'>
 					<TabsLocation business={business} />
+				</TabsContent>
+				<TabsContent value='general'>
+					<TabsGeneral business={business} />
 				</TabsContent>
 			</Tabs>
 		</>

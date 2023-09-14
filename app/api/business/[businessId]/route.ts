@@ -21,6 +21,7 @@ export async function PUT(
 			deliveryHourStart,
 			deliveryHourEnd,
 			category,
+			visibleInApp,
 		} = await req.json()
 
 		const business = await prismadb.business.update({
@@ -36,6 +37,7 @@ export async function PUT(
 				deliveryHourStart,
 				deliveryHourEnd,
 				category,
+				visibleInApp,
 			},
 		})
 
