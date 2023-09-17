@@ -25,11 +25,7 @@ const formSchema = z.object({
 
 type FieldValues = z.infer<typeof formSchema>
 
-type Props = {
-	ownerId: string
-}
-
-export const InitialBusinessForm = ({ ownerId }: Props) => {
+export const InitialBusinessForm = () => {
 	const router = useRouter()
 
 	const form = useForm<FieldValues>({

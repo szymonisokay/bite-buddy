@@ -2,8 +2,10 @@
 
 import { Business } from '@prisma/client'
 import { CheckIcon, ChevronsUpDownIcon, PlusCircleIcon } from 'lucide-react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { useState } from 'react'
 
+import { TooltipHover } from '@/components/tooltip-hover'
 import { Button } from '@/components/ui/button'
 import {
 	Command,
@@ -19,9 +21,8 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from '@/components/ui/popover'
+import { useModalStore } from '@/hooks/use-modal-store'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
-import { TooltipHover } from '../tooltip-hover'
 
 type Props = {
 	businesses: Business[]
@@ -29,11 +30,20 @@ type Props = {
 
 export const BusinessSelect = ({ businesses }: Props) => {
 	const params = useParams()
+	const router = useRouter()
+	const { onOpen } = useModalStore()
+
 	const [open, setOpen] = useState<boolean>(false)
 
 	const selectedBusiness = businesses.find(
 		(business) => business.id === params.businessId
 	)
+
+	const onBusinessSelect = (businessId: string) => {
+		router.push(`/business/${businessId}`)
+		router.refresh()
+		setOpen(false)
+	}
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
@@ -70,8 +80,13 @@ export const BusinessSelect = ({ businesses }: Props) => {
 										selectedBusiness?.id === business.id &&
 											'bg-slate-100 dark:bg-[#040405]'
 									)}
+									onSelect={() =>
+										onBusinessSelect(business.id)
+									}
 								>
-									<CheckIcon className='absolute w-4 h-4 left-2 shrink-0' />
+									{selectedBusiness?.id === business.id && (
+										<CheckIcon className='absolute w-4 h-4 left-2 shrink-0' />
+									)}
 									<TooltipHover content={business.name}>
 										<span className='truncate'>
 											{business.name}
@@ -86,7 +101,7 @@ export const BusinessSelect = ({ businesses }: Props) => {
 						<CommandGroup>
 							<CommandItem
 								onSelect={() => {
-									console.log('jet')
+									onOpen('createBusiness')
 									setOpen(false)
 								}}
 								className='cursor-pointer gap-x-2'

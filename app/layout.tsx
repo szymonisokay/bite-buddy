@@ -4,9 +4,10 @@ import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 
 import { ClientOnlyProvider } from '@/components/providers/client-only-provider'
+import { ModalsProvider } from '@/components/providers/modals-provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import { cn } from '@/lib/utils'
 
-import { cn } from '../lib/utils'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -61,7 +62,10 @@ export default function RootLayout({
 						enableSystem
 					>
 						<Toaster position='top-right' reverseOrder />
-						<ClientOnlyProvider>{children}</ClientOnlyProvider>
+						<ClientOnlyProvider>
+							<ModalsProvider />
+							{children}
+						</ClientOnlyProvider>
 					</ThemeProvider>
 				</body>
 			</html>

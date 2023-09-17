@@ -43,7 +43,7 @@ const CreateBusinessPage = async () => {
 						delivering via our app.
 					</CardDescription>
 				</CardHeader>
-				<InitialBusinessForm ownerId={user.id} />
+				<InitialBusinessForm />
 			</Card>
 		</div>
 	)
