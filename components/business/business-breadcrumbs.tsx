@@ -1,31 +1,40 @@
 'use client'
 
-import { Business } from '@prisma/client'
 import { ChevronRightIcon } from 'lucide-react'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link'
+import { useParams, usePathname } from 'next/navigation'
 
-import { checkForUuid } from '../../lib/check-uuid'
-import { BusinessSelect } from './business-select'
+import { checkForUuid } from '@/lib/check-uuid'
+import { cn } from '@/lib/utils'
 
-type Props = {
-	businesses: Business[]
-}
-
-export const BusinessBreadcrumbs = ({ businesses }: Props) => {
+export const BusinessBreadcrumbs = () => {
 	const pathname = usePathname()
+	const params = useParams()
 
 	const breadcrumbPath = pathname.split('/').pop()
 
 	const isUuid = checkForUuid(breadcrumbPath ?? '')
 
 	return (
-		<div className='flex items-center gap-x-4'>
-			<BusinessSelect businesses={businesses} />
+		<div className='flex items-center gap-x-2'>
+			{!isUuid ? (
+				<Link
+					href={`/business/${params.businessId}`}
+					className={cn(
+						'flex items-center gap-x-2',
+						!isUuid && 'text-muted-foreground'
+					)}
+				>
+					<span className='text-sm'>Dashboard</span>
+				</Link>
+			) : (
+				<span className='text-sm'>Dashboard</span>
+			)}
 
 			{!isUuid && (
 				<>
-					<ChevronRightIcon className='text-muted-foreground' />
-					<p className='capitalize'>{breadcrumbPath}</p>
+					<ChevronRightIcon className='w-4 h-4 text-muted-foreground' />
+					<p className='text-sm capitalize'>{breadcrumbPath}</p>
 				</>
 			)}
 		</div>

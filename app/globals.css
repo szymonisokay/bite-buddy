@@ -12,14 +12,14 @@ body,
 	@apply truncate overflow-hidden;
 }
 
-.map-container.dark .leaflet-layer,
-.map-container.dark .leaflet-control-zoom-in,
-.map-container.dark .leaflet-control-zoom-out,
-.map-container.dark .leaflet-control-attribution {
+.dark .leaflet-layer,
+.dark .leaflet-control-zoom-in,
+.dark .leaflet-control-zoom-out,
+.dark .leaflet-control-attribution {
 	@apply invert hue-rotate-180 brightness-100 contrast-100;
 }
 
-.map-container.dark .leaflet-control-attribution > a > svg {
+.dark .leaflet-control-attribution > a > svg {
 	@apply invert hue-rotate-180 brightness-100 contrast-100;
 }
 

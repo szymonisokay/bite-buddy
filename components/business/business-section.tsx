@@ -24,9 +24,9 @@ export const BusinessSection = ({ label, items }: Props) => {
 	const pathname = usePathname()
 
 	return (
-		<div className='mt-4'>
-			<p className='text-sm text-white'>{label}</p>
-			<div className='flex flex-col w-full mt-2 text-sm gap-y-3'>
+		<div className='mt-4 first-of-type:mt-0'>
+			<p className='px-4 text-sm'>{label}</p>
+			<div className='flex flex-col w-full mt-2 text-sm'>
 				{items.map((item) => {
 					const href = `/business/${params.businessId}${item.href}`
 
@@ -35,36 +35,36 @@ export const BusinessSection = ({ label, items }: Props) => {
 							key={item.href}
 							href={href}
 							className={cn(
-								'px-4 py-3 bg-primary-foreground/0 rounded-md flex gap-x-3 items-center text-muted-foreground hover:text-[#44d9d3] hover:bg-primary-foreground/40 duration-200',
+								'px-8 py-3 bg-primary-foreground/0  flex gap-x-3 items-center text-muted-foreground hover:text-[#1a8986] dark:hover:text-[#44d9d3] hover:bg-[#125755]/10 duration-200 relative',
 								pathname === href &&
-									'text-[#44d9d3] bg-primary-foreground/40'
+									'text-[#1a8986] dark:text-[#44d9d3] bg-[#125755]/10 before:absolute before:h-full before:w-[4px] before:bg-[#1a8986] before:left-0'
 							)}
 						>
 							{item.label === 'Home' && (
-								<HomeIcon className='w-5 h-5' />
+								<HomeIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Products' && (
-								<ShoppingBagIcon className='w-5 h-5' />
+								<ShoppingBagIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Prices' && (
-								<CoinsIcon className='w-5 h-5' />
+								<CoinsIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Orders' && (
-								<ClipboardListIcon className='w-5 h-5' />
+								<ClipboardListIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Sales' && (
-								<LineChartIcon className='w-5 h-5' />
+								<LineChartIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Settings' && (
-								<SettingsIcon className='w-5 h-5' />
+								<SettingsIcon className='w-4 h-4' />
 							)}
 
-							{item.label}
+							<span>{item.label}</span>
 						</Link>
 					)
 				})}

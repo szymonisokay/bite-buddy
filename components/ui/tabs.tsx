@@ -26,7 +26,7 @@ const TabsTrigger = React.forwardRef<
 	<TabsPrimitive.Trigger
 		ref={ref}
 		className={cn(
-			'relative inline-flex items-center justify-center whitespace-nowrap gap-x-2 px-3 py-3 text-sm font-medium text-muted-foreground ring-offset-background transition-all hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:dark:bg-[#09090b] data-[state=active]:text-[#1a8986] dark:data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=active]:before:absolute data-[state=active]:before:h-[2px] data-[state=active]:before:w-full data-[state=active]:before:bg-[#1a8986] data-[state=active]:before:-bottom-[1px] data-[state=active]:before:rounded-sm',
+			'relative inline-flex items-center justify-center whitespace-nowrap gap-x-2 px-3 py-3 text-sm font-medium text-muted-foreground ring-offset-background transition-all hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-[#1a8986] dark:data-[state=active]:text-foreground data-[state=active]:before:absolute data-[state=active]:before:h-[2px] data-[state=active]:before:w-full data-[state=active]:before:bg-[#1a8986] data-[state=active]:before:-bottom-[1px] data-[state=active]:before:rounded-sm',
 			className
 		)}
 		{...props}

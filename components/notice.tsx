@@ -18,25 +18,26 @@ export const Notice = ({ type, content, title }: Props) => {
 	return (
 		<Alert
 			className={cn(
-				type === 'error' && 'bg-red-900 border-red-900',
-				type === 'warning' && 'bg-orange-600/80 border-orange-600/80',
-				type === 'success' && 'bg-green-600 border-green-600'
+				'text-white border-none',
+				type === 'error' && 'bg-red-700 dark:bg-red-800',
+				type === 'warning' && 'bg-orange-600 dark:bg-orange-600/80',
+				type === 'success' && 'bg-[#1a8986] dark:bg-green-800 '
 			)}
 		>
 			{type === 'error' && (
-				<LucideShieldClose className='w-5 h-5 !top-[20px] !left-[14px]' />
+				<LucideShieldClose className='!text-white w-5 h-5 !top-[20px] !left-[14px]' />
 			)}
 			{type === 'warning' && (
-				<ShieldAlertIcon className='w-5 h-5 !top-[20px] !left-[14px]' />
+				<ShieldAlertIcon className='!text-white w-5 h-5 !top-[20px] !left-[14px]' />
 			)}
 			{type === 'success' && (
-				<ShieldCheckIcon className='w-5 h-5 !top-[20px] !left-[14px]' />
+				<ShieldCheckIcon className='!text-white w-5 h-5 !top-[20px] !left-[14px]' />
 			)}
 
 			<AlertTitle className={cn('text-lg font-semibold')}>
 				{title}
 			</AlertTitle>
-			<AlertDescription className='leading-tight text-primary/90'>
+			<AlertDescription className='leading-tight text-white/90 dark:text-primary/90'>
 				{content}
 			</AlertDescription>
 		</Alert>

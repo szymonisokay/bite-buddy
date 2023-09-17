@@ -3,7 +3,6 @@ import { BellIcon, LogOutIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { getUser } from '@/lib/get-user'
-import { prismadb } from '@/lib/prisma'
 
 import { BusinessBreadcrumbs } from './business-breadcrumbs'
 
@@ -14,15 +13,9 @@ export const BusinessTopBar = async () => {
 		return redirectToSignIn()
 	}
 
-	const businesses = await prismadb.business.findMany({
-		where: {
-			ownerId: user.id,
-		},
-	})
-
 	return (
 		<div className='h-[68px] p-4 flex items-center border-b fixed w-full md:w-[calc(100%-250px)] backdrop-blur z-10'>
-			<BusinessBreadcrumbs businesses={businesses} />
+			<BusinessBreadcrumbs />
 
 			<div className='flex items-center ml-auto gap-x-2'>
 				<Button size='icon' variant='ghost'>

@@ -25,7 +25,7 @@ export const BusinessSelect = ({ businesses }: Props) => {
 		<Select value={params.businessId as string}>
 			<SelectTrigger
 				title={selectedBusiness?.name}
-				className='business-select w-[210px] '
+				className='w-full business-select'
 			>
 				<SelectValue placeholder='Select business' />
 			</SelectTrigger>

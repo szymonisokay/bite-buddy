@@ -7,15 +7,6 @@ import { Circle, MapContainer, Marker, TileLayer } from 'react-leaflet'
 import { cn } from '@/lib/utils'
 
 import 'leaflet/dist/leaflet.css'
-import { useTheme } from 'next-themes'
-
-// @ts-ignore
-// delete L.Icon.Default.prototype._getIconUrl
-// L.Icon.Default.mergeOptions({
-// 	iconUrl: markerIcon.src,
-// 	iconRetinaUrl: markerIcon2x.src,
-// 	shadowUrl: markerShadow.src,
-// })
 
 interface Props {
 	className?: string
@@ -28,7 +19,6 @@ interface Props {
 
 export const Map = ({ className, location }: Props) => {
 	const map = useRef<null | MapContainerType>(null)
-	const { theme } = useTheme()
 
 	const icon = L.icon({
 		iconUrl: `https://api.geoapify.com/v1/icon/?type=material&color=%231a8986&size=small&iconType=material&scaleFactor=2&apiKey=${process.env.NEXT_PUBLIC_LEAFLET_ICON_MARKER_API_KEY}`,
@@ -47,7 +37,7 @@ export const Map = ({ className, location }: Props) => {
 		<div className={cn(className)}>
 			<MapContainer
 				ref={map}
-				className={cn('h-[300px] map-container', theme)}
+				className='h-[300px]'
 				center={markerLocation}
 				zoom={10}
 				scrollWheelZoom
