@@ -1,12 +1,13 @@
 'use client'
 
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import {
 	LucideShieldClose,
 	ShieldAlertIcon,
 	ShieldCheckIcon,
 } from 'lucide-react'
-import { cn } from '../lib/utils'
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { cn } from '@/lib/utils'
 
 type Props = {
 	type: 'success' | 'warning' | 'error'

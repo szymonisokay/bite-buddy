@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Business } from '@prisma/client'
+import axios from 'axios'
 import { Loader2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -16,7 +17,9 @@ import {
 	FormLabel,
 } from '@/components/ui/form'
 
+import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
 	Select,
 	SelectContent,
@@ -25,9 +28,6 @@ import {
 	SelectValue,
 } from '@/components/ui/select'
 import { getTimeFrames } from '@/lib/time-frames'
-import axios from 'axios'
-import { Heading } from '../heading'
-import { Input } from '../ui/input'
 
 const formSchema = z.object({
 	openHour: z.string().nullable(),

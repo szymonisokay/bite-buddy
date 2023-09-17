@@ -2,9 +2,11 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
@@ -13,10 +15,8 @@ import {
 	FormLabel,
 	FormMessage,
 } from '@/components/ui/form'
-import { useRouter } from 'next/navigation'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Textarea } from '../ui/textarea'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Company name is required.' }),

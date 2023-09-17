@@ -19,9 +19,9 @@ import {
 	FormLabel,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Slider } from '@/components/ui/slider'
+import { getLocationByAddress } from '@/lib/geolocation'
 import { BusinessWithOwnerWithLocation } from '@/types'
-import { getLocationByAddress } from '../../lib/geolocation'
-import { Slider } from '../ui/slider'
 
 const formSchema = z.object({
 	city: z.string().min(1),

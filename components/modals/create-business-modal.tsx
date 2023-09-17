@@ -1,6 +1,8 @@
 'use client'
 
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Business } from '@prisma/client'
 import { DialogClose } from '@radix-ui/react-dialog'
 import axios from 'axios'
 import { Loader2, XIcon } from 'lucide-react'
@@ -21,8 +23,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { useModalStore } from '@/hooks/use-modal-store'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Business } from '@prisma/client'
 
 const formSchema = z.object({
 	name: z.string().min(1, {
