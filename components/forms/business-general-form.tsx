@@ -83,7 +83,7 @@ export const BusinessGeneralForm = ({ business, meals }: Props) => {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<div className='flex items-center justify-between pr-2'>
+								<div className='flex items-center justify-between gap-4'>
 									<Label
 										className='max-w-xs'
 										htmlFor='visibleInApp'
@@ -114,7 +114,7 @@ export const BusinessGeneralForm = ({ business, meals }: Props) => {
 					render={({ field }) => (
 						<FormItem>
 							<FormControl>
-								<div className='flex items-center justify-between pr-2'>
+								<div className='flex items-center justify-between gap-4'>
 									<Label
 										className='max-w-xs'
 										htmlFor='approved'

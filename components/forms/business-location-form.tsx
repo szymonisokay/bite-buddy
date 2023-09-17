@@ -112,7 +112,7 @@ export const BusinessLocationForm = ({ business }: Props) => {
 					description='Specify where your restaurant is located'
 				/>
 
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-2'>
+				<div className='grid grid-cols-1 gap-2 xs:grid-cols-2'>
 					<FormField
 						control={form.control}
 						name='city'
@@ -152,7 +152,7 @@ export const BusinessLocationForm = ({ business }: Props) => {
 					/>
 				</div>
 
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-x-2'>
+				<div className='grid grid-cols-1 gap-2 -mt-2 xs:mt-0 xs:grid-cols-2'>
 					<FormField
 						control={form.control}
 						name='street1'

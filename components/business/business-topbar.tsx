@@ -21,7 +21,7 @@ export const BusinessTopBar = async () => {
 	})
 
 	return (
-		<div className='h-[68px] p-4 flex items-center border-b'>
+		<div className='h-[68px] p-4 flex items-center border-b fixed w-full md:w-[calc(100%-250px)] backdrop-blur z-10'>
 			<BusinessBreadcrumbs businesses={businesses} />
 
 			<div className='flex items-center ml-auto gap-x-2'>

@@ -19,7 +19,7 @@ export const BusinessSidebar = async () => {
 	}
 
 	return (
-		<div className='w-[250px] dark:bg-[#060607] overflow-hidden'>
+		<div className='w-[250px] dark:bg-[#060607] overflow-hidden hidden md:flex flex-col'>
 			<BusinessAvatar user={user} />
 
 			<div className='p-4'>

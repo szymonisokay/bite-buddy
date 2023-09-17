@@ -83,7 +83,7 @@ export const BusinessDetailsForm = ({ business }: Props) => {
 					description='Specify what time your restaurant is open and what are the delivering hours'
 				/>
 
-				<div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+				<div className='grid grid-cols-1 gap-2 xs:grid-cols-2'>
 					<FormField
 						control={form.control}
 						name='openHour'
@@ -153,7 +153,7 @@ export const BusinessDetailsForm = ({ business }: Props) => {
 					/>
 				</div>
 
-				<div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
+				<div className='grid grid-cols-1 gap-2 -mt-2 xs:mt-0 xs:grid-cols-2'>
 					<FormField
 						control={form.control}
 						name='deliveryHourStart'
