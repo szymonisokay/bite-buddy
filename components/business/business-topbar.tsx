@@ -1,21 +1,40 @@
-import { redirectToSignIn } from '@clerk/nextjs'
-import { BellIcon, LogOutIcon } from 'lucide-react'
+'use client'
 
+import { ArrowLeft, BellIcon, LogOutIcon } from 'lucide-react'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+
+import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
-import { getUser } from '@/lib/get-user'
+import { checkForUuid } from '../../lib/check-uuid'
 
-import { BusinessBreadcrumbs } from './business-breadcrumbs'
+type Props = {
+	title: string
+	description?: string
+}
 
-export const BusinessTopBar = async () => {
-	const user = await getUser()
+export const BusinessTopBar = ({ title, description }: Props) => {
+	const router = useRouter()
+	const params = useParams()
+	const pathname = usePathname()
 
-	if (!user) {
-		return redirectToSignIn()
-	}
+	const isDashboard = checkForUuid(pathname.split('/').pop() ?? '')
 
 	return (
-		<div className='h-[68px] p-4 flex items-center border-b fixed w-full md:w-[calc(100%-250px)] backdrop-blur z-10'>
-			<BusinessBreadcrumbs />
+		<div className='p-4 pt-6 pl-0 flex items-center fixed top-0 right-0 w-full md:w-[calc(100%-250px)] backdrop-blur z-10'>
+			<div className='flex gap-x-2'>
+				{!isDashboard && (
+					<Button
+						onClick={() =>
+							router.push(`/business/${params.businessId}`)
+						}
+						variant='ghost'
+						size='icon'
+					>
+						<ArrowLeft />
+					</Button>
+				)}
+				<Heading title={title} description={description} />
+			</div>
 
 			<div className='flex items-center ml-auto gap-x-2'>
 				<Button size='icon' variant='ghost'>

@@ -3,6 +3,7 @@ import { redirectToSignIn } from '@clerk/nextjs'
 import { getUser } from '@/lib/get-user'
 import { prismadb } from '@/lib/prisma'
 import { redirect } from 'next/navigation'
+import { BusinessTopBar } from '../../../../../components/business/business-topbar'
 
 const BusinessIdPage = async ({
 	params,
@@ -28,7 +29,15 @@ const BusinessIdPage = async ({
 		return redirect('/')
 	}
 
-	return <div className='p-4'>{business.name}</div>
+	return (
+		<div className='p-4'>
+			<BusinessTopBar
+				title='Dashboard'
+				description='Overview of your business'
+			/>
+			{business.name}
+		</div>
+	)
 }
 
 export default BusinessIdPage

@@ -23,6 +23,10 @@ body,
 	@apply invert hue-rotate-180 brightness-100 contrast-100;
 }
 
+div[data-radix-scroll-area-viewport] > div {
+	@apply h-full;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;

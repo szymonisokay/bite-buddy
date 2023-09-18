@@ -78,7 +78,7 @@ export const BusinessSelect = ({ businesses }: Props) => {
 									className={cn(
 										'relative pl-8 cursor-pointer',
 										selectedBusiness?.id === business.id &&
-											'bg-slate-100 dark:bg-[#040405]'
+											'bg-slate-100 dark:bg-[#050505]'
 									)}
 									onSelect={() =>
 										onBusinessSelect(business.id)

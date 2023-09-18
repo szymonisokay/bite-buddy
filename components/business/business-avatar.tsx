@@ -10,7 +10,7 @@ type Props = {
 
 export const BusinessAvatar = ({ user }: Props) => {
 	return (
-		<div className='flex items-center w-full p-4 overflow-x-hidden gap-x-2'>
+		<div className='flex items-center w-full px-4 pt-6 pb-2 overflow-x-hidden gap-x-2'>
 			<Avatar className='w-8 h-8'>
 				<AvatarImage src={user.imageUrl} />
 				<AvatarFallback>{user.name.charAt(0)}</AvatarFallback>

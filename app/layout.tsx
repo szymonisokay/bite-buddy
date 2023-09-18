@@ -55,7 +55,12 @@ export default function RootLayout({
 			}}
 		>
 			<html lang='en' suppressHydrationWarning>
-				<body className={cn('dark:bg-[#09090b]', inter.className)}>
+				<body
+					className={cn(
+						'bg-slate-100 dark:bg-[#050505]',
+						inter.className
+					)}
+				>
 					<ThemeProvider
 						attribute='class'
 						defaultTheme='dark'

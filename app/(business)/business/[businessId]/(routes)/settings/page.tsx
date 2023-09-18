@@ -2,6 +2,7 @@ import { prismadb } from '@/lib/prisma'
 import { redirectToSignIn } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 
+import { BusinessTopBar } from '@/components/business/business-topbar'
 import { TabsDetails } from '@/components/tabs/tabs-details'
 import { TabsGeneral } from '@/components/tabs/tabs-general'
 import { Tabsinformation } from '@/components/tabs/tabs-information'
@@ -43,6 +44,10 @@ const BusinessSettingsPage = async ({
 
 	return (
 		<>
+			<BusinessTopBar
+				title='Settings'
+				description='Manage your business settings'
+			/>
 			<Tabs defaultValue='information'>
 				<TabsList>
 					<TabsTrigger value='information'>Information</TabsTrigger>
