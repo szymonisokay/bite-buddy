@@ -9,8 +9,8 @@ export const DashboardNavigationItems: NavigationItem[] = [
 
 export const ProductsNavigationItems: NavigationItem[] = [
 	{
-		label: 'Products',
-		href: '/products',
+		label: 'Menu',
+		href: '/menu',
 	},
 	{
 		label: 'Prices',

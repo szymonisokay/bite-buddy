@@ -1,12 +1,12 @@
 'use client'
 
 import {
+	BeefIcon,
 	ClipboardListIcon,
 	CoinsIcon,
 	HomeIcon,
 	LineChartIcon,
 	SettingsIcon,
-	ShoppingBagIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
@@ -44,8 +44,8 @@ export const BusinessSection = ({ label, items }: Props) => {
 								<HomeIcon className='w-4 h-4' />
 							)}
 
-							{item.label === 'Products' && (
-								<ShoppingBagIcon className='w-4 h-4' />
+							{item.label === 'Menu' && (
+								<BeefIcon className='w-4 h-4' />
 							)}
 
 							{item.label === 'Prices' && (
