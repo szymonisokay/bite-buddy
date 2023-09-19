@@ -28,7 +28,7 @@ export const BusinessSidebar = async () => {
 	})
 
 	return (
-		<div className='w-[250px] bg-slate-100 dark:bg-[#050505] overflow-hidden hidden md:flex flex-col'>
+		<div className='w-[250px] shrink-0 bg-slate-100 dark:bg-[#050505] overflow-hidden hidden md:flex flex-col'>
 			<BusinessAvatar user={user} />
 
 			<div className='p-4'>
@@ -41,10 +41,7 @@ export const BusinessSidebar = async () => {
 					items={DashboardNavigationItems}
 				/>
 
-				<BusinessSection
-					label='Products'
-					items={ProductsNavigationItems}
-				/>
+				<BusinessSection label='Menu' items={ProductsNavigationItems} />
 
 				<BusinessSection
 					label='Overview'

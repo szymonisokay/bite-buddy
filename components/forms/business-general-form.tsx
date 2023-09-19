@@ -1,7 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Meal } from '@prisma/client'
+import { Menu } from '@prisma/client'
 import axios from 'axios'
 import { Loader2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
@@ -27,10 +27,10 @@ type FormValues = z.infer<typeof formSchema>
 
 type Props = {
 	business: BusinessWithOwnerWithLocation
-	meals: Meal[]
+	menu: Menu | null
 }
 
-export const BusinessGeneralForm = ({ business, meals }: Props) => {
+export const BusinessGeneralForm = ({ business, menu }: Props) => {
 	const router = useRouter()
 
 	const form = useForm<FormValues>({
@@ -42,7 +42,7 @@ export const BusinessGeneralForm = ({ business, meals }: Props) => {
 	})
 
 	const loading = form.formState.isSubmitting
-	const noticeVisible = !(!!business.location && !!meals.length)
+	const noticeVisible = !business.location && (!menu || !menu.active)
 
 	const onSubmit = async (values: FormValues) => {
 		try {

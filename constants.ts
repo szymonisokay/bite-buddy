@@ -13,8 +13,8 @@ export const ProductsNavigationItems: NavigationItem[] = [
 		href: '/menu',
 	},
 	{
-		label: 'Prices',
-		href: '/prices',
+		label: 'Meals',
+		href: '/meals',
 	},
 ]
 

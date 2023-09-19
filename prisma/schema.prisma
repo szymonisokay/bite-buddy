@@ -46,8 +46,8 @@ model Business {
   owner               User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   reviews             Review[]
-  meals               Meal[]
 
+  menu                Menu?
   location            Location?
 
   @@index([ownerId])
@@ -104,28 +104,32 @@ model Review {
   @@index([businessId])
 }
 
-enum MealType {
-  MAIN
-  FASTFOOD
-  TRADITIONAL
-  SOUP
-  BEVERAGES
-  ADDITIVES
-  OTHER
+model Menu {
+  id            String @id @default(uuid())
+  active        Boolean @default(false)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  meals         Meal[]
+
+  businessId    String @unique
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
 
 model Meal {
   id            String @id @default(uuid())
   name          String
   description   String?
-  type          MealType @default(MAIN)
+  category      String
   price         Float
+  active        Boolean @default(false)
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  businessId    String @unique
-  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  menuId        String @unique
+  menu          Menu @relation(fields: [menuId], references: [id], onDelete: Cascade)
 
   cartId        String @unique
   cart          Cart @relation(fields: [cartId], references: [id])
@@ -133,7 +137,7 @@ model Meal {
   orderId       String @unique
   order         Order @relation(fields: [orderId], references: [id])
 
-  @@index([businessId])
+  @@index([menuId])
   @@index([cartId])
 }
 

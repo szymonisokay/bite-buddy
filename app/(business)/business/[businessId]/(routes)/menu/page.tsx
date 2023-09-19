@@ -1,16 +1,17 @@
-import { Heading } from '@/components/heading'
-import { MenuTabs } from '@/components/menu/menu-tabs'
+import { BusinessTopBar } from '@/components/business/business-topbar'
+import { Button } from '../../../../../../components/ui/button'
 
 const MenuPage = () => {
 	return (
 		<>
-			<Heading
-				border
+			<BusinessTopBar
 				title='Menu'
 				description='Manage your active menu and meals'
 			/>
 
-			<MenuTabs />
+			<Button className='self-end' variant='primary'>
+				Create meal
+			</Button>
 		</>
 	)
 }

@@ -7,6 +7,7 @@ import {
 	HomeIcon,
 	LineChartIcon,
 	SettingsIcon,
+	UtensilsCrossedIcon,
 } from 'lucide-react'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
@@ -26,7 +27,7 @@ export const BusinessSection = ({ label, items }: Props) => {
 	return (
 		<div className='mt-4 first-of-type:mt-0'>
 			<p className='px-4 text-sm'>{label}</p>
-			<div className='flex flex-col w-full px-4 mt-2 text-sm'>
+			<div className='flex flex-col w-full px-4 mt-2 text-sm gap-y-2'>
 				{items.map((item) => {
 					const href = `/business/${params.businessId}${item.href}`
 
@@ -47,6 +48,10 @@ export const BusinessSection = ({ label, items }: Props) => {
 							)}
 
 							{item.label === 'Menu' && (
+								<UtensilsCrossedIcon className='w-4 h-4' />
+							)}
+
+							{item.label === 'Meals' && (
 								<BeefIcon className='w-4 h-4' />
 							)}
 

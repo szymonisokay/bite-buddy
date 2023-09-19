@@ -36,7 +36,7 @@ const BusinessSettingsPage = async ({
 		return redirect('/')
 	}
 
-	const meals = await prismadb.meal.findMany({
+	const menu = await prismadb.menu.findUnique({
 		where: {
 			businessId: params.businessId,
 		},
@@ -65,7 +65,7 @@ const BusinessSettingsPage = async ({
 					<TabsLocation business={business} />
 				</TabsContent>
 				<TabsContent value='general'>
-					<TabsGeneral business={business} meals={meals} />
+					<TabsGeneral business={business} menu={menu} />
 				</TabsContent>
 			</Tabs>
 		</>

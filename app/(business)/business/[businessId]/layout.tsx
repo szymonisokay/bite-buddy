@@ -7,7 +7,7 @@ const BusinessLayout = ({ children }: { children: React.ReactNode }) => {
 			<BusinessSidebar />
 			<main className='flex-1 w-full'>
 				<ScrollArea className='w-full h-full'>
-					<section className=' pt-[84px] h-full'>
+					<section className='pt-[84px] h-full'>
 						<div className='bg-white dark:bg-[#09090b] p-4 m-4 mt-0 ml-0 rounded-md h-[calc(100%-16px)]'>
 							{children}
 						</div>

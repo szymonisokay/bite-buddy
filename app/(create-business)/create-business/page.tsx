@@ -33,8 +33,8 @@ const CreateBusinessPage = async () => {
 
 	return (
 		<div className='flex items-center justify-center h-full'>
-			<Card className='max-w-[400px]'>
-				<CardHeader>
+			<Card className='max-w-[400px] dark:bg-[#09090b]'>
+				<CardHeader className='p-4'>
 					<CardTitle className='text-xl'>
 						Welcome to BiteBuddy!
 					</CardTitle>
