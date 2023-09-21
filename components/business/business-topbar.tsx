@@ -24,9 +24,7 @@ export const BusinessTopBar = ({ title, description }: Props) => {
 			<div className='flex gap-x-2'>
 				{!isDashboard && (
 					<Button
-						onClick={() =>
-							router.push(`/business/${params.businessId}`)
-						}
+						onClick={() => router.back()}
 						variant='ghost'
 						size='icon'
 					>
