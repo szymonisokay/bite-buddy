@@ -1,9 +1,9 @@
 import { redirectToSignIn } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
+import { BusinessTopBar } from '@/components/business/business-topbar'
 import { getUser } from '@/lib/get-user'
 import { prismadb } from '@/lib/prisma'
-import { redirect } from 'next/navigation'
-import { BusinessTopBar } from '../../../../../components/business/business-topbar'
 
 const BusinessIdPage = async ({
 	params,

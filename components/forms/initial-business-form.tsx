@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { Loader2Icon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -17,7 +18,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Loader2Icon } from 'lucide-react'
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: 'Company name is required.' }),

@@ -5,7 +5,7 @@ import { useParams, usePathname, useRouter } from 'next/navigation'
 
 import { Heading } from '@/components/heading'
 import { Button } from '@/components/ui/button'
-import { checkForUuid } from '../../lib/check-uuid'
+import { checkForUuid } from '@/lib/check-uuid'
 
 type Props = {
 	title: string

@@ -1,8 +1,8 @@
 import { BusinessTopBar } from '@/components/business/business-topbar'
 import { MealInformationForm } from '@/components/forms/meal-information-form'
+import { MealSettingsForm } from '@/components/forms/meal-settings-form'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { prismadb } from '@/lib/prisma'
-import { MealSettingsForm } from '../../../../../../../components/forms/meal-settings-form'
 
 type Params = {
 	businessId: string

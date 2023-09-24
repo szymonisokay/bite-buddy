@@ -1,5 +1,12 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Meal } from '@prisma/client'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+
+import { Heading } from '@/components/heading'
+import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
@@ -7,14 +14,8 @@ import {
 	FormItem,
 	FormMessage,
 } from '@/components/ui/form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Meal } from '@prisma/client'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
-import { Heading } from '../heading'
-import { Button } from '../ui/button'
-import { Label } from '../ui/label'
-import { Switch } from '../ui/switch'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 
 const formSchema = z.object({
 	active: z.boolean(),
