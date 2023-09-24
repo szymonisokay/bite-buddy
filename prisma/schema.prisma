@@ -46,6 +46,7 @@ model Business {
   owner               User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   reviews             Review[]
+  meals               Meal[]
 
   menu                Menu?
   location            Location?
@@ -129,7 +130,10 @@ model Meal {
   updatedAt     DateTime @updatedAt
 
   menuId        String @unique
-  menu          Menu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  menu          Menu @relation(fields: [menuId], references: [id])
+
+  businessId    String @unique
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
   cartId        String @unique
   cart          Cart @relation(fields: [cartId], references: [id])

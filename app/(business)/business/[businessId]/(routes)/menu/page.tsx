@@ -19,6 +19,12 @@ const MenuPage = async ({ params }: { params: { businessId: string } }) => {
 		},
 	})
 
+	const meals = await prismadb.meal.findMany({
+		where: {
+			businessId: params.businessId,
+		},
+	})
+
 	return (
 		<>
 			<BusinessTopBar
@@ -34,6 +40,14 @@ const MenuPage = async ({ params }: { params: { businessId: string } }) => {
 					description='Create one right now'
 					actionLabel='Create your first menu'
 					href='menu/create'
+				/>
+			)}
+
+			{menu && !meals.length && (
+				<Empty
+					title='You have no created meals'
+					actionLabel='Create your first meal'
+					href='meals'
 				/>
 			)}
 		</>
