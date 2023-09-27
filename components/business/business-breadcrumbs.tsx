@@ -19,6 +19,7 @@ export const BusinessBreadcrumbs = () => {
 		<div className='flex items-center gap-x-2'>
 			{!isUuid ? (
 				<Link
+					prefetch={false}
 					href={`/business/${params.businessId}`}
 					className={cn(
 						'flex items-center gap-x-2',

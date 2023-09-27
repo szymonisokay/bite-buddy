@@ -125,24 +125,27 @@ model Meal {
   category      String
   price         Float
   active        Boolean @default(false)
+  featured      Boolean @default(false)
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  menuId        String @unique
-  menu          Menu @relation(fields: [menuId], references: [id])
+  menuId        String? 
+  menu          Menu? @relation(fields: [menuId], references: [id])
 
-  businessId    String @unique
+  businessId    String
   business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
-  cartId        String @unique
-  cart          Cart @relation(fields: [cartId], references: [id])
+  cartId        String? 
+  cart          Cart? @relation(fields: [cartId], references: [id])
 
-  orderId       String @unique
-  order         Order @relation(fields: [orderId], references: [id])
+  orderId       String? 
+  order         Order? @relation(fields: [orderId], references: [id])
 
   @@index([menuId])
   @@index([cartId])
+  @@index([orderId])
+  @@index([businessId])
 }
 
 model Cart {

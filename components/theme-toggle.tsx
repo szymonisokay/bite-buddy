@@ -28,7 +28,7 @@ export function ThemeToggle() {
 					<span className='text-sm capitalize'>{theme}</span>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className='dark:bg-[#09090b]' align='start'>
+			<DropdownMenuContent align='start'>
 				<DropdownMenuItem onClick={() => setTheme('light')}>
 					Light
 				</DropdownMenuItem>

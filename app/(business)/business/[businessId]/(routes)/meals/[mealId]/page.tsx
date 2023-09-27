@@ -20,16 +20,16 @@ const MealIdPage = async ({ params }: { params: Params }) => {
 	return (
 		<>
 			<BusinessTopBar
-				title='Create meal'
+				title={meal ? meal.name : 'Create meal'}
 				description='Fill in all required fields'
 			/>
 
 			<Tabs defaultValue='info'>
 				<TabsList>
 					<TabsTrigger value='info'>Information</TabsTrigger>
-					{/* {meal && ( */}
-					<TabsTrigger value='settings'>Settings</TabsTrigger>
-					{/* )} */}
+					{meal && (
+						<TabsTrigger value='settings'>Settings</TabsTrigger>
+					)}
 				</TabsList>
 				<TabsContent value='info'>
 					<MealInformationForm meal={meal} />

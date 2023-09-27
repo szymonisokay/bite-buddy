@@ -16,6 +16,11 @@ import {
 } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
+import axios from 'axios'
+import { Loader2Icon } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
+import { useModalStore } from '../../hooks/use-modal-store'
 
 const formSchema = z.object({
 	active: z.boolean(),
@@ -29,6 +34,10 @@ type Props = {
 }
 
 export const MealSettingsForm = ({ meal }: Props) => {
+	const params = useParams()
+	const router = useRouter()
+	const { onOpen } = useModalStore()
+
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: meal || {
@@ -37,8 +46,43 @@ export const MealSettingsForm = ({ meal }: Props) => {
 		},
 	})
 
+	const loading = form.formState.isSubmitting
+
 	const onSubmit = async (values: FormValues) => {
-		console.log(values)
+		try {
+			await axios.put(
+				`/api/business/${params.businessId}/meals/${meal?.id}/settings`,
+				values
+			)
+
+			router.refresh()
+
+			toast.success('Meal updated')
+		} catch (error) {
+			console.log(error)
+		}
+	}
+
+	const onMealDelete = async () => {
+		onOpen('confirmMealDelete', {
+			confirm: {
+				title: 'Are you sure you want to delete this meal?',
+				description: 'This action will permanently delete this meal',
+				apiUrl: `/api/business/${params.businessId}/meals/${meal?.id}`,
+				redirectUrl: `/business/${params.businessId}/meals`,
+			},
+		})
+		// try {
+		// 	await axios.delete(
+		// 		`/api/business/${params.businessId}/meals/${meal?.id}`
+		// 	)
+
+		// 	router.refresh()
+		// 	router.push(`/business/${params.businessId}/meals`)
+		// 	toast.success('Meal deleted')
+		// } catch (error) {
+		// 	console.log(error)
+		// }
 	}
 
 	return (
@@ -74,6 +118,7 @@ export const MealSettingsForm = ({ meal }: Props) => {
 									</Label>
 									<Switch
 										id='active'
+										disabled={loading}
 										checked={field.value}
 										onCheckedChange={field.onChange}
 									/>
@@ -107,6 +152,7 @@ export const MealSettingsForm = ({ meal }: Props) => {
 									</Label>
 									<Switch
 										id='featured'
+										disabled={loading}
 										checked={field.value}
 										onCheckedChange={field.onChange}
 									/>
@@ -117,7 +163,14 @@ export const MealSettingsForm = ({ meal }: Props) => {
 					)}
 				/>
 
-				<Button variant='primary' className='self-end'>
+				<Button
+					disabled={loading}
+					variant='primary'
+					className='self-end'
+				>
+					{loading && (
+						<Loader2Icon className='w-4 h-4 mr-2 animate-spin' />
+					)}
 					Update
 				</Button>
 
@@ -131,6 +184,8 @@ export const MealSettingsForm = ({ meal }: Props) => {
 					type='button'
 					variant='destructive'
 					className='self-end'
+					disabled={loading}
+					onClick={onMealDelete}
 				>
 					Delete
 				</Button>

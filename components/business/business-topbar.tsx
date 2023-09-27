@@ -22,15 +22,15 @@ export const BusinessTopBar = ({ title, description }: Props) => {
 	return (
 		<div className='p-4 pt-6 pl-0 flex items-center fixed top-0 right-0 w-full md:w-[calc(100%-250px)] backdrop-blur z-10'>
 			<div className='flex gap-x-2'>
-				{!isDashboard && (
-					<Button
-						onClick={() => router.back()}
-						variant='ghost'
-						size='icon'
-					>
-						<ArrowLeft />
-					</Button>
-				)}
+				{/* {!isDashboard && ( */}
+				<Button
+					onClick={() => router.back()}
+					variant='ghost'
+					size='icon'
+				>
+					<ArrowLeft />
+				</Button>
+				{/* )} */}
 				<Heading title={title} description={description} />
 			</div>
 

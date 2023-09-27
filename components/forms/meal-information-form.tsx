@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Meal } from '@prisma/client'
-import { DollarSignIcon } from 'lucide-react'
+import { DollarSignIcon, Loader2Icon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
@@ -19,14 +19,20 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import axios from 'axios'
+import { useParams, useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 const formSchema = z.object({
-	name: z.string().min(1),
+	name: z.string().min(1, { message: 'Name must be provided' }),
 	description: z.string().optional(),
-	category: z.string().min(1),
-	price: z.string().regex(/^\d{0,8}(\.\d{1,4})?$/, {
-		message: 'Invalid price',
-	}),
+	category: z.string().min(1, { message: 'Category must be provided' }),
+	price: z
+		.string()
+		.nonempty({ message: 'Price must be provided' })
+		.regex(/^\d{0,8}(\.\d{1,4})?$/, {
+			message: 'Invalid price',
+		}),
 })
 
 type FormValues = z.infer<typeof formSchema>
@@ -36,22 +42,45 @@ type Props = {
 }
 
 export const MealInformationForm = ({ meal }: Props) => {
+	const params = useParams()
+	const router = useRouter()
+
 	const form = useForm<FormValues>({
+		mode: 'onChange',
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			...meal,
+			name: meal?.name || '',
 			description: meal?.description || '',
-			price: String(meal?.price || ''),
-		} || {
-			name: '',
-			description: '',
-			category: '',
-			price: '',
+			category: meal?.category || '',
+			price: String(meal?.price || '') || '',
 		},
 	})
 
+	const loading = form.formState.isSubmitting
+
 	const onSubmit = async (values: FormValues) => {
-		console.log(values)
+		try {
+			if (meal?.id) {
+				await axios.put(
+					`/api/business/${params.businessId}/meals/${meal.id}`,
+					values
+				)
+
+				router.refresh()
+				toast.success('Meal updated')
+			} else {
+				const response = await axios.post<string>(
+					`/api/business/${params.businessId}/meals`,
+					values
+				)
+
+				router.replace(`${response.data}`)
+				router.refresh()
+				toast.success('Meal created')
+			}
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (
@@ -73,7 +102,11 @@ export const MealInformationForm = ({ meal }: Props) => {
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input {...field} placeholder='Meal name' />
+								<Input
+									{...field}
+									placeholder='Meal name'
+									disabled={loading}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -91,6 +124,7 @@ export const MealInformationForm = ({ meal }: Props) => {
 									{...field}
 									placeholder='Meal description'
 									value={field.value || ''}
+									disabled={loading}
 								/>
 							</FormControl>
 							<FormMessage />
@@ -109,7 +143,11 @@ export const MealInformationForm = ({ meal }: Props) => {
 								field as heading.
 							</FormDescription>
 							<FormControl>
-								<Input {...field} placeholder='Category' />
+								<Input
+									{...field}
+									placeholder='Category'
+									disabled={loading}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -129,6 +167,7 @@ export const MealInformationForm = ({ meal }: Props) => {
 										{...field}
 										className='pl-8'
 										placeholder='Price'
+										disabled={loading}
 									/>
 								</div>
 							</FormControl>
@@ -137,8 +176,16 @@ export const MealInformationForm = ({ meal }: Props) => {
 					)}
 				/>
 
-				<Button variant='primary' className='self-end'>
-					Create
+				<Button
+					disabled={loading}
+					variant='primary'
+					className='self-end'
+				>
+					{loading && (
+						<Loader2Icon className='w-4 h-4 mr-2 animate-spin' />
+					)}
+
+					{meal ? <span>Update</span> : <span>Create</span>}
 				</Button>
 			</form>
 		</Form>
