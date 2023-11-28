@@ -1,6 +1,6 @@
 import { auth } from '@clerk/nextjs'
 
-import { prismadb } from '@/lib/prisma'
+import { db } from '@/lib/db'
 
 export const getUser = async () => {
 	const { userId } = auth()
@@ -9,7 +9,7 @@ export const getUser = async () => {
 		return null
 	}
 
-	const user = await prismadb.user.findUnique({
+	const user = await db.user.findUnique({
 		where: {
 			userId,
 		},
