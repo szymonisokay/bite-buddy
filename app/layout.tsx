@@ -1,12 +1,17 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 
+import { ModalsProvider } from '@/components/providers/modals-provider'
+import { ToastProvider } from '@/components/providers/toast-provider'
 import { cn } from '@/lib/utils'
 
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '900'],
+})
 
 export const metadata: Metadata = {
 	title: 'BiteBuddy',
@@ -54,9 +59,11 @@ export default function RootLayout({
 				<body
 					className={cn(
 						'bg-slate-100 dark:bg-[#050505]',
-						inter.className
+						poppins.className
 					)}
 				>
+					<ModalsProvider />
+					<ToastProvider />
 					{children}
 				</body>
 			</html>

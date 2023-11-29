@@ -2,7 +2,7 @@ import { currentUser } from '@clerk/nextjs'
 
 import { db } from '@/lib/db'
 
-export const createUser = async () => {
+export const getProfile = async () => {
 	const user = await currentUser()
 
 	if (!user) return null
