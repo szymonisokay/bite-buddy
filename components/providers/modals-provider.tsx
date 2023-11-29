@@ -1,22 +1,13 @@
 'use client'
 
-import { CreateInitialBusinessModal } from '@/components/modals/create-business-modal'
-import { useEffect, useState } from 'react'
+import { useMounted } from '@/hooks/use-mounted'
 
 export const ModalsProvider = () => {
-	const [mounted, setMounted] = useState<boolean>(false)
-
-	useEffect(() => {
-		setMounted(true)
-	})
+	const { mounted } = useMounted()
 
 	if (!mounted) {
 		return null
 	}
 
-	return (
-		<>
-			<CreateInitialBusinessModal />
-		</>
-	)
+	return <></>
 }

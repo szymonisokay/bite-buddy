@@ -10,7 +10,7 @@ import './globals.css'
 
 const poppins = Poppins({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '900'],
+	weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 export const metadata: Metadata = {
@@ -56,12 +56,7 @@ export default function RootLayout({
 			}}
 		>
 			<html lang='en' suppressHydrationWarning>
-				<body
-					className={cn(
-						'bg-slate-100 dark:bg-[#050505]',
-						poppins.className
-					)}
-				>
+				<body className={cn('', poppins.className)}>
 					<ModalsProvider />
 					<ToastProvider />
 					{children}

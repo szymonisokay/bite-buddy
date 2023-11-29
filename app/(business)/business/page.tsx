@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
+import { CreateInitialBusinessModal } from '@/components/modals/create-initial-business-modal'
 import { db } from '@/lib/db'
 import { getProfile } from '@/lib/get-profile'
-import { UserButton } from '@clerk/nextjs'
 
 const BusinessPage = async () => {
 	const profile = await getProfile()
@@ -21,12 +21,7 @@ const BusinessPage = async () => {
 		redirect(`/business/${business.id}`)
 	}
 
-	return (
-		<div>
-			business
-			<UserButton afterSignOutUrl='/' />
-		</div>
-	)
+	return <CreateInitialBusinessModal />
 }
 
 export default BusinessPage

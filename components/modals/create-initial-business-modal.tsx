@@ -1,13 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { toast } from 'react-hot-toast'
-
-import { createBusiness } from '@/actions/business/create-business'
-import {
-	CreateBusinessForm,
-	CreateBusinessFormValues,
-} from '@/components/forms/create-business-form'
+import { CreateBusinessForm } from '@/components/forms/create-business-form'
 import {
 	Dialog,
 	DialogContent,
@@ -15,20 +8,13 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from '@/components/ui/dialog'
+import { useMounted } from '@/hooks/use-mounted'
 
 export const CreateInitialBusinessModal = () => {
-	const router = useRouter()
+	const { mounted } = useMounted()
 
-	const onSubmit = async (values: CreateBusinessFormValues) => {
-		try {
-			const businessId = await createBusiness(values)
-
-			if (!businessId) return
-
-			router.replace(`/business/${businessId}`)
-		} catch (error: any) {
-			toast.error(error.message)
-		}
+	if (!mounted) {
+		return null
 	}
 
 	return (
@@ -54,7 +40,7 @@ export const CreateInitialBusinessModal = () => {
 					</DialogClose> */}
 				</DialogHeader>
 
-				<CreateBusinessForm onSubmit={onSubmit} />
+				<CreateBusinessForm />
 			</DialogContent>
 		</Dialog>
 	)

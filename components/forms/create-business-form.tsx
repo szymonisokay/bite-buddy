@@ -1,9 +1,13 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import * as z from 'zod'
 
+import { createBusiness } from '@/actions/business/create-business'
 import { Button } from '@/components/ui/button'
 import {
 	Form,
@@ -17,17 +21,15 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
 const formSchema = z.object({
-	name: z.string().min(3, 'Please provide name for your business'),
+	name: z.string().min(3, 'Business name must be at least 3 characters long'),
 	bio: z.string().optional(),
 })
 
 export type CreateBusinessFormValues = z.infer<typeof formSchema>
 
-type Props = {
-	onSubmit: (values: CreateBusinessFormValues) => void
-}
+export const CreateBusinessForm = () => {
+	const router = useRouter()
 
-export const CreateBusinessForm = ({ onSubmit }: Props) => {
 	const form = useForm<CreateBusinessFormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -36,15 +38,26 @@ export const CreateBusinessForm = ({ onSubmit }: Props) => {
 		},
 	})
 
-	const handleSubmit = async (values: CreateBusinessFormValues) => {
-		onSubmit(values)
+	const loading = form.formState.isSubmitting
+
+	const onSubmit = async (values: CreateBusinessFormValues) => {
+		try {
+			const businessId = await createBusiness(values)
+
+			if (!businessId) return
+
+			router.refresh()
+			router.push(`/business/${businessId}`)
+		} catch (error: any) {
+			toast.error(error.message)
+		}
 	}
 
 	return (
 		<Form {...form}>
 			<form
 				className='flex flex-col gap-4'
-				onSubmit={form.handleSubmit(handleSubmit)}
+				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<FormField
 					name='name'
@@ -53,7 +66,7 @@ export const CreateBusinessForm = ({ onSubmit }: Props) => {
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input {...field} />
+								<Input {...field} disabled={loading} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -67,14 +80,19 @@ export const CreateBusinessForm = ({ onSubmit }: Props) => {
 						<FormItem>
 							<FormLabel>Bio</FormLabel>
 							<FormControl>
-								<Textarea {...field} />
+								<Textarea {...field} disabled={loading} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 
-				<Button>Create business</Button>
+				<Button>
+					{loading && (
+						<Loader className='w-4 h-4 mr-2 animate-spin' />
+					)}
+					Create business
+				</Button>
 			</form>
 		</Form>
 	)
