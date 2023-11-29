@@ -9,7 +9,7 @@ export const getUser = async () => {
 		return null
 	}
 
-	const user = await db.user.findUnique({
+	const user = await db.profile.findUnique({
 		where: {
 			userId,
 		},

@@ -8,7 +8,7 @@ datasource db {
   relationMode = "prisma"
 } 
 
-model User {
+model Profile {
   id          String @id @default(uuid())
   userId      String @unique
   name        String
@@ -43,7 +43,7 @@ model Business {
   updatedAt           DateTime @updatedAt
 
   ownerId             String
-  owner               User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  owner               Profile @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   reviews             Review[]
   meals               Meal[]
@@ -81,8 +81,8 @@ model Address {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  userId      String @unique
-  user        User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileId   String @unique
+  profile     Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 model Review {
@@ -95,13 +95,13 @@ model Review {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   
-  userId        String
-  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileId     String
+  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
   businessId    String @unique
   business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  @@index([profileId])
   @@index([businessId])
 }
 
@@ -159,8 +159,8 @@ model Cart {
   meals         Meal[]
   order         Order?
 
-  userId        String @unique
-  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileId     String @unique
+  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }
 
 enum OrderType {
@@ -183,8 +183,8 @@ model Order {
   cartId        String @unique
   cart          Cart @relation(fields: [cartId], references: [id])
 
-  userId        String
-  user          User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profileId     String
+  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 
-  @@index([userId])
+  @@index([profileId])
 }

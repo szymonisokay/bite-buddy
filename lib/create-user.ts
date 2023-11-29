@@ -3,28 +3,28 @@ import { currentUser } from '@clerk/nextjs'
 import { db } from '@/lib/db'
 
 export const createUser = async () => {
-	const clerkUser = await currentUser()
+	const user = await currentUser()
 
-	if (!clerkUser) return null
+	if (!user) return null
 
-	const user = await db.user.findUnique({
+	const profile = await db.profile.findUnique({
 		where: {
-			userId: clerkUser.id,
+			userId: user.id,
 		},
 	})
 
-	if (user) {
-		return user
+	if (profile) {
+		return profile
 	}
 
-	const newUser = await db.user.create({
+	const newProfile = await db.profile.create({
 		data: {
-			userId: clerkUser.id,
-			name: `${clerkUser.firstName} ${clerkUser.lastName}`,
-			email: clerkUser.emailAddresses[0].emailAddress,
-			imageUrl: clerkUser.imageUrl,
+			userId: user.id,
+			name: `${user.firstName} ${user.lastName}`,
+			email: user.emailAddresses[0].emailAddress,
+			imageUrl: user.imageUrl,
 		},
 	})
 
-	return newUser
+	return newProfile
 }
