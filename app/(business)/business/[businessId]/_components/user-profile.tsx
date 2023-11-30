@@ -14,6 +14,7 @@ export const UserProfile = async () => {
 					src={profile?.imageUrl || ''}
 					alt={profile?.name || ''}
 					className='rounded-md'
+					sizes='32px'
 				/>
 			</div>
 		</div>

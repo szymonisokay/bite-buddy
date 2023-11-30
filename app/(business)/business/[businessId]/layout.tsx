@@ -1,3 +1,4 @@
+import { Sidebar } from './_components/sidebar'
 import { TopBar } from './_components/topbar'
 
 type Params = {
@@ -6,10 +7,13 @@ type Params = {
 
 const BusinessIdLayout = ({ children }: Params) => {
 	return (
-		<div>
-			<TopBar />
+		<div className='flex h-full bg-slate-100'>
+			<Sidebar />
+			<div className='flex flex-col flex-1 bg-white rounded-md md:m-4 md:ml-0 md:shadow-sm'>
+				<TopBar />
 
-			<main>{children}</main>
+				<main className='flex-1 p-4 overflow-y-auto'>{children}</main>
+			</div>
 		</div>
 	)
 }
