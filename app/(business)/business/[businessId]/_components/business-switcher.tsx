@@ -23,7 +23,7 @@ export const BusinessSwitcher = async () => {
 }
 
 const BusinessSwitcherSkeleton = () => {
-	return <Skeleton className='w-full h-10 bg-white' />
+	return <Skeleton className='w-full h-10' />
 }
 
 BusinessSwitcher.Skeleton = BusinessSwitcherSkeleton
