@@ -1,6 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 
 import { ModalsProvider } from '@/components/providers/modals-provider'
 import { ToastProvider } from '@/components/providers/toast-provider'
@@ -8,9 +8,9 @@ import { cn } from '@/lib/utils'
 
 import './globals.css'
 
-const poppins = Poppins({
+const poppins = Roboto({
 	subsets: ['latin'],
-	weight: ['400', '500', '600', '700', '800', '900'],
+	weight: ['300', '400', '500', '700', '900'],
 })
 
 export const metadata: Metadata = {
