@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 
 import { BusinessSwitcher } from './business-switcher'
 import { Navigation } from './navigation'
+import { SidebarFooter } from './sidebar-footer'
 import { UserProfile } from './user-profile'
 
 export const Sidebar = () => {
@@ -16,6 +17,8 @@ export const Sidebar = () => {
 			</Suspense>
 
 			<Navigation />
+
+			<SidebarFooter />
 		</aside>
 	)
 }

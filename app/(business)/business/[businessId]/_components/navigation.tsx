@@ -16,7 +16,6 @@ export const Navigation = () => {
 	const pathname = usePathname()
 	const params = useParams()
 
-	console.log(pathname)
 	const routes = [
 		{
 			label: 'Dashboard',
@@ -46,7 +45,7 @@ export const Navigation = () => {
 	]
 
 	return (
-		<div className='flex flex-col gap-2 mt-4'>
+		<div className='flex flex-col flex-1 gap-2 mt-4'>
 			{routes.map(({ label, href, icon: Icon }) => {
 				const hrefPath = `/business/${params?.businessId}${href}`
 				const active = pathname === hrefPath
