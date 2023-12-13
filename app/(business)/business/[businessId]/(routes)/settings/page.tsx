@@ -4,6 +4,7 @@ import { BusinessInformationTab } from '@/components/tabs/business-information-t
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 
 import { BusinessDetailsTab } from '@/components/tabs/business-details-tab'
+import { BusinessLocationTab } from '@/components/tabs/business-location-tab'
 import { SettingsTabsList } from './_components/settings-tabs-list'
 import { TabSkeleton } from './_components/tab-skeleton'
 
@@ -30,6 +31,11 @@ const SettingsPage = ({ searchParams, params }: Params) => {
 			<TabsContent value='details'>
 				<Suspense fallback={<TabSkeleton />}>
 					<BusinessDetailsTab businessId={params.businessId} />
+				</Suspense>
+			</TabsContent>
+			<TabsContent value='location'>
+				<Suspense fallback={<TabSkeleton />}>
+					<BusinessLocationTab businessId={params.businessId} />
 				</Suspense>
 			</TabsContent>
 		</Tabs>
