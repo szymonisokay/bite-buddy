@@ -1,10 +1,11 @@
 import { Suspense } from 'react'
 
+import { BusinessDetailsTab } from '@/components/tabs/business-details-tab'
+import { BusinessGeneralTab } from '@/components/tabs/business-general-tab'
 import { BusinessInformationTab } from '@/components/tabs/business-information-tab'
+import { BusinessLocationTab } from '@/components/tabs/business-location-tab'
 import { Tabs, TabsContent } from '@/components/ui/tabs'
 
-import { BusinessDetailsTab } from '@/components/tabs/business-details-tab'
-import { BusinessLocationTab } from '@/components/tabs/business-location-tab'
 import { SettingsTabsList } from './_components/settings-tabs-list'
 import { TabSkeleton } from './_components/tab-skeleton'
 
@@ -36,6 +37,11 @@ const SettingsPage = ({ searchParams, params }: Params) => {
 			<TabsContent value='location'>
 				<Suspense fallback={<TabSkeleton />}>
 					<BusinessLocationTab businessId={params.businessId} />
+				</Suspense>
+			</TabsContent>
+			<TabsContent value='general'>
+				<Suspense fallback={<TabSkeleton />}>
+					<BusinessGeneralTab businessId={params.businessId} />
 				</Suspense>
 			</TabsContent>
 		</Tabs>
