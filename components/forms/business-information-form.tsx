@@ -8,6 +8,9 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import * as z from 'zod'
 
+import { updateBusiness } from '@/actions/business/update-business'
+import { Heading } from '@/components/heading'
+import { Button } from '@/components/ui/button'
 import {
 	Form,
 	FormControl,
@@ -15,10 +18,6 @@ import {
 	FormItem,
 	FormLabel,
 } from '@/components/ui/form'
-
-import { updateBusiness } from '@/actions/business/update-business'
-import { Heading } from '@/components/heading'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
@@ -52,8 +51,8 @@ export const BusinessInformationForm = ({ business }: Props) => {
 
 			toast.success('Business information updated')
 			router.refresh()
-		} catch (error) {
-			console.log(error)
+		} catch (error: any) {
+			toast.error(error.message)
 		}
 	}
 

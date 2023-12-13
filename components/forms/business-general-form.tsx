@@ -8,12 +8,11 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import * as z from 'zod'
 
-import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
-
 import { updateBusiness } from '@/actions/business/update-business'
 import { Heading } from '@/components/heading'
 import { Notice } from '@/components/notice'
 import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 
@@ -53,8 +52,8 @@ export const BusinessGeneralForm = ({ business, menu }: Props) => {
 
 			toast.success('Business general information updated')
 			router.refresh()
-		} catch (error) {
-			console.log(error)
+		} catch (error: any) {
+			toast.error(error.message)
 		}
 	}
 
