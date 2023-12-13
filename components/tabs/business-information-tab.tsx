@@ -15,8 +15,6 @@ export const BusinessInformationTab = async ({ businessId }: Props) => {
 		},
 	})
 
-	await new Promise((resolve) => setTimeout(resolve, 2000))
-
 	if (!business) {
 		return redirect('/business')
 	}
