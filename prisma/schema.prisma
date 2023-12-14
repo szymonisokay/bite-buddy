@@ -46,6 +46,7 @@ model Business {
   owner               Profile @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   reviews             Review[]
+  mealCategories      MealCategory[]
   meals               Meal[]
 
   menu                Menu?
@@ -118,17 +119,35 @@ model Menu {
   business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
 }
 
+model MealCategory {
+  id            String @id @default(uuid())
+  name          String
+  description   String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  meals         Meal[]
+
+  businessId    String
+  business      Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId])
+}
+
 model Meal {
   id            String @id @default(uuid())
   name          String
   description   String?
-  category      String
   price         Float
   active        Boolean @default(false)
   featured      Boolean @default(false)
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
+  categoryId    String
+  category      MealCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   menuId        String? 
   menu          Menu? @relation(fields: [menuId], references: [id])
@@ -142,6 +161,7 @@ model Meal {
   orderId       String? 
   order         Order? @relation(fields: [orderId], references: [id])
 
+  @@index([categoryId])
   @@index([menuId])
   @@index([cartId])
   @@index([orderId])
