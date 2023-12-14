@@ -28,8 +28,8 @@ export const Navigation = () => {
 			icon: BookOpenIcon,
 		},
 		{
-			label: 'Products',
-			href: '/products',
+			label: 'Meals',
+			href: '/meals',
 			icon: ShoppingBagIcon,
 		},
 		{

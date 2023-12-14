@@ -4,7 +4,6 @@ import { db } from '@/lib/db'
 import { getProfile } from '@/lib/get-profile'
 
 import { MobileSidebar } from './_components/mobile-sidebar'
-import { PageHeading } from './_components/page-heading'
 import { Sidebar } from './_components/sidebar'
 import { TopBar } from './_components/topbar'
 
@@ -34,7 +33,7 @@ const BusinessIdLayout = async ({ children }: Params) => {
 				<TopBar />
 
 				<main className='flex-1 p-4 overflow-y-auto'>
-					<PageHeading />
+					{/* <PageHeading /> */}
 					{children}
 				</main>
 			</div>
