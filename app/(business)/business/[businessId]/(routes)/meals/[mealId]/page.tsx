@@ -19,9 +19,15 @@ const MealPage = async ({ params }: { params: Params }) => {
 		},
 	})
 
+	const categories = await db.mealCategory.findMany({
+		where: {
+			businessId,
+		},
+	})
+
 	return (
 		<div>
-			<MealUpsertForm meal={meal} />
+			<MealUpsertForm meal={meal} categories={categories} />
 		</div>
 	)
 }

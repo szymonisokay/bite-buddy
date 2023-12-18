@@ -2,9 +2,11 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Meal, MealCategory } from '@prisma/client'
+import { StarIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
+import { CategoryCommand } from '@/components/category-command'
 import { FormSwitch } from '@/components/form-switch'
 import { Button } from '@/components/ui/button'
 import {
@@ -34,9 +36,10 @@ type Props = {
 				category: MealCategory
 		  })
 		| null
+	categories: MealCategory[]
 }
 
-export const MealUpsertForm = ({ meal }: Props) => {
+export const MealUpsertForm = ({ meal, categories }: Props) => {
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: meal || {
@@ -60,7 +63,7 @@ export const MealUpsertForm = ({ meal }: Props) => {
 				onSubmit={form.handleSubmit(onSubmit)}
 			>
 				<div className='grid grid-cols-1 gap-4 lg:grid-cols-2'>
-					<div>
+					<div className='space-y-1'>
 						<FormField
 							control={form.control}
 							name='name'
@@ -109,9 +112,25 @@ export const MealUpsertForm = ({ meal }: Props) => {
 								</FormItem>
 							)}
 						/>
+
+						<FormField
+							control={form.control}
+							name='categoryId'
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Category</FormLabel>
+									<FormControl>
+										<CategoryCommand
+											{...field}
+											categories={categories}
+										/>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
 					</div>
 
-					<div className=''>
+					<div className='space-y-4'>
 						<FormField
 							control={form.control}
 							name='active'
@@ -122,9 +141,23 @@ export const MealUpsertForm = ({ meal }: Props) => {
 											{...field}
 											label='Active'
 											description='Set visibility of this meal'
-											// onChange={(value) =>
-											// 	field.onChange(value)
-											// }
+										/>
+									</FormControl>
+								</FormItem>
+							)}
+						/>
+
+						<FormField
+							control={form.control}
+							name='featured'
+							render={({ field }) => (
+								<FormItem>
+									<FormControl>
+										<FormSwitch
+											{...field}
+											label='Featured'
+											description='Feature this meal at the top of the menu'
+											icon={StarIcon}
 										/>
 									</FormControl>
 								</FormItem>
